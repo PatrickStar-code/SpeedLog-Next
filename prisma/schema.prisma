@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  idUsuario       Int       @id @default(autoincrement()) @map("idUsuario")
+  nomeUsuario     String    @map("nome_usuario")
+  loginUsuario    String    @unique @map("login_usuario")
+  senhaUsuario    String    @map("senha_usuario")
+  cpfUsuario      String    @unique @map("cpf_usuario")
+  cepUsuario      String    @map("cep_usuario")
+  emailUsuario    String    @unique @map("email_usuario")
+  telefoneUsuario String    @map("telefone_usuario")
+  fotoUsuario     String?   @default("ft_padrao_user.png") @map("foto_usuario")
+  criacaoUser     DateTime  @default(now()) @map("criacao_user")
+  hashKey         String?   @map("hash_key")
+  hashExpiry      String?   @map("hash_expiry")
+
+  entregas Entrega[]
+
+  @@map("usuario")
+}
+
+model Motoboy {
+  idmotoboy        Int       @id @default(autoincrement()) @map("idmotoboy")
+  nomeMotoboy      String    @map("nome_motoboy")
+  emailMotoboy     String    @unique @map("email_motoboy")
+  criacaoFunc      DateTime  @default(now()) @map("criacao_func")
+  fotoMotoboy      String    @map("foto_motoboy")
+  cpfMotoboy       String    @unique @map("cpf_motoboy")
+  telefoneMotoboy  String    @map("telefone_motoboy")
+  placaMoto        String    @unique @map("placa_moto")
+  loginMotoboy     String    @unique @map("login_motoboy")
+  senhaMotoboy     String    @map("senha_motoboy")
+  cnhMotoboy       String    @unique @map("cnh_motoboy")
+  cnhFotoMotoboy   String    @map("cnh_foto_motoboy")
+  contaCorrente    String    @map("conta_corrente")
+  agencia          String
+  statusCnhMotoboy String    @default("Em Analise") @map("status_cnh_motoboy")
+
+  entregas Entrega[]
+
+  @@map("motoboy")
+}
+
+model Administrador {
+  idAdm      Int     @id @default(autoincrement()) @map("id_adm")
+  loginAdm   String  @unique @map("login_adm")
+  senhaAdm   String  @map("senha_adm")
+  nomeAdm    String  @map("nome_adm")
+  telefoneAdm String @map("telefone_adm")
+  cepAdm     String  @map("cep_adm")
+  cpfAdm     String  @unique @map("cpf_adm")
+  emailAdm   String  @unique @map("email_adm")
+
+  @@map("administrador")
+}
+
+model Entrega {
+  idEntregas              Int       @id @default(autoincrement()) @map("idEntregas")
+  descEntrega             String    @map("desc_entrega")
+  pesoEntrega             Float     @map("peso_entrega")
+  complementoEntrega      String?   @map("complemento_entrega")
+  cepOrigemEntrega        String    @map("cep_origem_entrega")
+  numeroOrigemEntrega     Int       @map("numero_origem_entrega")
+  bairroOrigem            String?   @map("bairro_origem")
+  logradouroOrigem        String?   @map("logradouro_origem")
+  cepDestinoEntrega       String    @map("cep_destino_entrega")
+  numeroDestinoEntrega    Int       @map("numero_destino_entrega")
+  bairroDestino           String    @map("bairro_destino")
+  logradouroDestino       String    @map("logradouro_destino")
+  distanciaKm             String    @map("distancia_km")
+  tempoTransporteKm       String    @map("tempo_transporte_km")
+  tempoMinutos            Int       @map("tempo_minutos")
+  valorTotal              Float     @map("valor_total")
+  valor70p                Float     @map("valor_70p")
+  dataPedido              DateTime  @default(now()) @map("data_pedido")
+  statusEntrega           String    @default("Pendente") @map("status_entrega")
+  assinadoPor             String?   @default("") @map("assinado_por")
+  horaInicioTransporte    DateTime? @map("hora_inicio_transporte")
+  horaPrevistoTranporte   DateTime? @map("hora_previsto_tranporte")
+  motoboyIdmotoboy        Int?      @map("motoboy_idmotoboy")
+  usuarioIdUsuario        Int?      @map("Usuario_idUsuario")
+
+  motoboy  Motoboy? @relation(fields: [motoboyIdmotoboy], references: [idmotoboy])
+  usuario  Usuario? @relation(fields: [usuarioIdUsuario], references: [idUsuario])
+
+  @@index([motoboyIdmotoboy], map: "fk_Entregas_motoboy_idx")
+  @@index([usuarioIdUsuario], map: "fk_Entregas_Usuario1_idx")
+  @@map("entregas")
+}
+
+model PrecoPeso {
+  id       Int     @id @default(autoincrement())
+  pesoMin  Decimal @db.Decimal(4, 2) @map("peso_min")
+  pesoMax  Decimal @db.Decimal(4, 2) @map("peso_max")
+  preco    Decimal @db.Decimal(4, 2)
+
+  @@map("preco_peso")
+}
+
+model PrecoKm {
+  idKm      Int     @id @default(autoincrement()) @map("id_km")
+  kmRodado  Int     @map("km_rodado")
+  valorKm   Float   @map("valor_km")
+
+  @@map("preco_km")
+}
+
+model PrecoTempo {
+  idTempo     Int     @id @default(autoincrement()) @map("id_tempo")
+  tempoRodado Int     @map("tempo_rodado")
+  valorTempo  Float   @map("valor_tempo")
+
+  @@map("preco_tempo")
+}
