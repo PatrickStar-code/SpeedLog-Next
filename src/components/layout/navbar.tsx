@@ -29,8 +29,8 @@ export function Navbar({ role, userName, userImage, onLogout, onMenuClick }: Nav
     return (
       <header className="sticky top-0 z-30 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4" aria-label="Main navigation">
-          <Link href="/" className="font-bold text-xl text-primary">
-            SpeedLog
+          <Link href="/" className="inline-flex" aria-label="SpeedLog - início">
+            <img src="/imgs/Logo.PNG" alt="SpeedLog" className="h-8 w-auto" />
           </Link>
 
           <div className="hidden md:flex md:items-center md:gap-6">

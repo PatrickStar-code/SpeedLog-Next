@@ -76,7 +76,7 @@ function CadastroForm() {
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <Link href="/" className="inline-block">
-              <span className="text-3xl font-bold text-primary">SpeedLog</span>
+              <img src="/imgs/Logo.PNG" alt="SpeedLog" className="mx-auto h-12 w-auto" />
             </Link>
             <h1 className="mt-6 text-2xl font-bold">Cadastro de Cliente</h1>
             <p className="mt-2 text-muted-foreground">

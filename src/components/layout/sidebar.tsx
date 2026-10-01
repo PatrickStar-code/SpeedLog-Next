@@ -63,8 +63,12 @@ export function Sidebar({ role, userName, userEmail, userImage, onLogout, classN
       <div className="flex h-full flex-col">
         {/* Header */}
         <div className="flex h-16 items-center justify-between border-b px-4">
-          <Link href={role === 'cliente' ? '/cliente' : role === 'motoboy' ? '/motoboy' : '/admin'} className="font-bold text-xl text-primary">
-            SpeedLog
+          <Link
+            href={role === 'cliente' ? '/cliente' : role === 'motoboy' ? '/motoboy' : '/admin'}
+            className="inline-flex"
+            aria-label="SpeedLog - início"
+          >
+            <img src="/imgs/Logo.PNG" alt="SpeedLog" className="h-9 w-auto" />
           </Link>
         </div>
 

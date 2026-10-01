@@ -1,26 +1,111 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ */
+/*  SpeedLog Design System                                             */
+/*  Paleta extraída da identidade da marca (public/imgs):             */
+/*   - Teal principal: #009090 (Logo.PNG)                              */
+/*   - Dark teal:     #003030 (Home.PNG, banner_speedlog.PNG)         */
+/*   - Verde acento:  #30D070 (Cliente.png)                            */
+/* ------------------------------------------------------------------ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6faf9;
+  --foreground: #07211f;
+  --card: #ffffff;
+  --card-foreground: #07211f;
+  --popover: #ffffff;
+  --popover-foreground: #07211f;
+  --primary: #009090;
+  --primary-foreground: #ffffff;
+  --secondary: #e0f2f0;
+  --secondary-foreground: #05504c;
+  --muted: #edf4f3;
+  --muted-foreground: #5c7775;
+  --accent: #d2eeeb;
+  --accent-foreground: #05504c;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --success: #1fbf6d;
+  --success-foreground: #05301a;
+  --border: #d9e8e6;
+  --input: #cfe3e0;
+  --ring: #009090;
+
+  /* Superfícies escuras da marca (hero, footer, CTA) */
+  --night: #032f2d;
+  --night-deep: #021f1d;
+  --night-soft: #0a3e3a;
+  --teal-bright: #35b5ae;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #032421;
+    --foreground: #e4f2ef;
+    --card: #07302c;
+    --card-foreground: #e4f2ef;
+    --popover: #07302c;
+    --popover-foreground: #e4f2ef;
+    --primary: #14a8a2;
+    --primary-foreground: #ffffff;
+    --secondary: #0c3b37;
+    --secondary-foreground: #bfe3de;
+    --muted: #0a3430;
+    --muted-foreground: #8fb2ad;
+    --accent: #105049;
+    --accent-foreground: #d9f2ee;
+    --destructive: #f87171;
+    --destructive-foreground: #ffffff;
+    --success: #34d979;
+    --success-foreground: #05301a;
+    --border: #14504a;
+    --input: #17544e;
+    --ring: #14a8a2;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-night: var(--night);
+  --color-night-deep: var(--night-deep);
+  --color-night-soft: var(--night-soft);
+  --color-teal-bright: var(--teal-bright);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  ::selection {
+    background-color: #009090;
+    color: #ffffff;
+  }
 }
